@@ -31,7 +31,10 @@ INIT i to zero
      i less than or equal to array length
      INCREMENT i
 IF number is equal to phonebook array element
-     PRINT number matches
+     PRINT number in phonebook
+     RETURN true
+ELSE PRINT number not in phonebook
+     RETURN false  
 END FOR LOOP
 
 4. Using the pseudocode you wrote for the previous question, implement it in any
@@ -39,14 +42,16 @@ computer language of your choice.
 
 var phonebookArray = [911, 9129399753, 8378398374];
 
-function numberSearch(number) {
+function isInPhonebook(number) {
     for (i=0; i<phonebookArray.length; i++) {
-        if (number === phonebookArray[i]) {
-           console.log('This number is in the phonebook');
+        if (number === phonebookArray[i]){
+          console.log("This number is in the phonebook");
+          return true;
         } else {
-           console.log('This number is not in the phonebook');
+          console.log("This number is not in the phonebook");
+          return false;
         }
     }
 }
 
-numberSearch(911);
+isInPhonebook(911);
