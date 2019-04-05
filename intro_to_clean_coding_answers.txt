@@ -66,33 +66,37 @@ CLASS BankAccount
       PRINT balance
       PRINT hasCreditCard
       PRINT hasCheckingAccount
+   END FUNCTION
 END CLASS
 
-FUNCTION displayBalance
-  PRINT BankAccount.balance
-END FUNCTION
+CLASS AtmActions
+      FUNCTION displayBalance
+        PRINT balance
+      END FUNCTION
 
-FUNCTION deposit(amount)
-  SET balance to BankAccount.balance + amount
-END FUNCTION
+      FUNCTION deposit(amount)
+        SET balance to balance + amount
+      END FUNCTION
 
-FUNCTION withdraw(amount)
-   IF BankAccount.balance > amount THEN
-     SET BankAccount.balance to BankAccount.balance - amount
-   END
-END FUNCTION
+      FUNCTION withdraw(amount)
+         IF balance > amount THEN
+           SET balance to balance - amount
+         END
+      END FUNCTION
+END CLASS
 
-FUNCTION creditCardOffer
-   IF NOT(BankAccount.hasCreditCard) THEN
-       CALL offerCreditCard
-   END
-END FUNCTION
-
-FUNCTION checkStatus
-   IF NOT(BankAccount.hasCheckingAccount) THEN
-       CALL offerCheckingAccount
-   END
-END FUNCTION
+CLASS accountOffers
+      FUNCTION offerNewAccount
+         IF NOT(BankAccount.hasCreditCard && BankAccount.hasCheckingAccount) THEN
+             CALL offerCreditCard
+             CALL offerCheckingAccount
+         ELSE IF (BankAccount.hasCreditCard && !BankAccount.hasCheckingAccount) THEN
+             CALL offerCheckingAccount
+         ELSE IF (!BankAccount.hasCreditCard && BankAccount.hasCheckingAccount) THEN
+             CALL offerCreditCard
+         ELSE RETURN 
+      END FUNCTION
+END CLASS
 
 6.
 
