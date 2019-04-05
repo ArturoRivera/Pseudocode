@@ -1,0 +1,124 @@
+1. Clean code simply means that your code is legible, easy to understand, and
+be read and maintained by other developers without too much confusion. This also
+means using less redundant code and avoiding over-engineering your code.
+
+2. There was news recently about a certain type of Boeing airplanes being
+grounded because two of them had crashed within the last couple of months. The
+cause was an error in a system that controls the elevation and the direction of
+the airplane. This is a perfect example of a system that probably had numerous
+bugs that prevented the airplane from flying with safety. Transportation in
+general needs to have developers who are extremely careful with their code
+because it can be very dangerous if systems fail.
+
+3. No the code is not clean because it doesn't use descriptive names for the
+variables or the function. The correct code should be:
+
+FUNCTION convertTemp(tempToConvert, unitOfTemp)
+
+ IF unitOfTemp = "F" THEN
+    SET newTemp to (tempToConvert−32) * (5/9)
+    PRINT newTemp
+
+ ELSE IF unitOfTemp = "C" THEN
+    SET newTemp to tempToConvert * 1.8000 + 32.00
+    PRINT newTemp
+ END IF
+
+END FUNCTION
+
+4. It is clean code because the names of the variables and the function are
+specific and there isn't any redundant code. The code is also easy to read and
+understand which makes it useful when working with other developers that may
+need to maintain the code.
+
+5a.
+
+FUNCTION checkOutCustomer(subTotal, discountRate, paymentType)
+   SET total = subTotal * discountRate + (subTotal * tax)
+   PRINT "Your total due is: " + total
+
+   IF paymentType = 'CASH' THEN
+       CALL getCashPayment RETURNING amount
+       PRINT "Change due: " + amount - total
+   ELSE IF paymentType = 'CREDIT CARD' THEN
+       PRINT "Your credit card has been charged: " + total
+   END IF
+END FUNCTION
+
+5b.
+
+FUNCTION checkoutBook(book, guest)
+   IF guest.accountActive
+      AND NOT(guest.hasOverdueBooks)
+      AND guest.outstandingFees = 0 THEN
+             APPEND book to guest.books
+             SET book.status to "Checked Out"
+             PRINT "Your books have been issued."
+   ELSE
+       PRINT "Unable to check out book."
+   END IF
+END FUNCTION
+
+5c.
+
+CLASS BankAccount
+   FUNCTION getAccountInfo
+      PRINT balance
+      PRINT hasCreditCard
+      PRINT hasCheckingAccount
+END CLASS
+
+FUNCTION displayBalance
+  PRINT BankAccount.balance
+END FUNCTION
+
+FUNCTION deposit(amount)
+  SET balance to BankAccount.balance + amount
+END FUNCTION
+
+FUNCTION withdraw(amount)
+   IF BankAccount.balance > amount THEN
+     SET BankAccount.balance to BankAccount.balance - amount
+   END
+END FUNCTION
+
+FUNCTION creditCardOffer
+   IF NOT(BankAccount.hasCreditCard) THEN
+       CALL offerCreditCard
+   END
+END FUNCTION
+
+FUNCTION checkStatus
+   IF NOT(BankAccount.hasCheckingAccount) THEN
+       CALL offerCheckingAccount
+   END
+END FUNCTION
+
+6.
+
+function square(array){
+    var total = 0;
+    for(var i in array) {
+      total += array[i];
+    }
+
+    if(total > 0 && Math.sqrt(total) % 1 === 0) {
+      console.log(Math.sqrt(total));
+    } else {
+      console.log(total)
+    }
+}
+
+square([10,1,4,6,1,2])
+
+7.
+
+function checkIfThereAreDuplicates(myArray) {
+  return myArray.length === new Set(myArray).size;
+}
+
+if(checkIfThereAreDuplicates([10,1,4,6,2])) {
+  console.log("No duplicates");
+} else {
+  console.log("There are duplicates");
+}
